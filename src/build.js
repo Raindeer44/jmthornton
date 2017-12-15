@@ -13,14 +13,16 @@ const dirs: Array<string> = [
   'p',
   'projects',
   'tools',
-  'tools/news'
+  'tools/news',
+  'gallery',
+  'assets/script/lib'
 ]
 
 const build = (): void => {
   checkDeps();
   compileSass();
   compileJS();
-  doBeautify();
+  doPurify();
 }
 
 const checkDeps = (): void => {
@@ -28,7 +30,7 @@ const checkDeps = (): void => {
     console.error('building requires Sass, please install Sass');
     sh.exit(1);
   }
-  if (!sh.which('node_modules/purify-css/bin/purifycss')) {
+  if (!sh.which('node_modules/.bin/purifycss')) {
     console.error('Try `npm install` first');
     sh.exit(1);
   }
@@ -38,35 +40,26 @@ const compileSass = (): void => {
   sh.exec('sass assets/style/main.scss assets/style/main.css');
 }
 
-const doBeautify = (): void => {
-  prepStyle();
+const doPurify = (): void => {
   purifyStyle()
-    .then((): void => {
-      removeTmp();
-    }, (err: mixed): void => {
+    .catch((err: mixed): void => {
       console.error(err);
-      removeTmp();
     });
 }
 
-const prepStyle = (): void => {
-  sh.mkdir('tmp');
-  sh.mv('assets/style/main.css', 'tmp/m.css');
-}
-
 const purifyStyle = async (): Promise<void> => {
-  const whitelist: string = await getHtmlFiles();
-  const cmd: string = `node_modules/purify-css/bin/purifycss --min --info --out assets/style/main.css tmp/m.css ${whitelist}`;
+  const whitelist: string = await getContentFiles();
+  const cmd: string = `node_modules/.bin/purifycss --min --info assets/style/main.css ${whitelist} --out assets/style/main.css`;
   sh.exec(cmd);
 }
 
-const getHtmlFiles = async (): Promise<string> => {
+const getContentFiles = async (): Promise<string> => {
   let fileList: Array<string | Array<*>> = [];
   let files: mixed;
   for (let d of dirs) {
     files = await getFiles(d);
     files = files
-      .filter(f => path.extname(f) === '.html')
+      .filter(f => path.extname(f) === '.html' || path.extname(f) === '.js')
       .map((f) => `${d}/${f}`);
     fileList.push(files);
   }
@@ -74,7 +67,7 @@ const getHtmlFiles = async (): Promise<string> => {
 }
 
 const getFiles = (dir: string): Promise<*> => new Promise((resolve, reject) => {
-  console.log(`reading ${dir} for HTML files...`);
+  console.log(`reading ${dir} for content files...`);
   fs.readdir(dir, (err, files) => {
     if (err) {
       reject(err);
@@ -99,14 +92,8 @@ const stringifySpaces = (arr: Array<Array<*> | string>): string => {
   return str;
 }
 
-const removeTmp = (): void => {
-  sh.rm('-rf', './tmp');
-}
-
 const compileJS = (): void => {
-  console.log('compiling main site scripts');
   sh.exec('babel assets/script/src/ -d assets/script/lib/');
-  console.log('compiling news site scripts');
   sh.exec('babel tools/news/assets/script/src -d tools/news/assets/script/lib');
 }
 
