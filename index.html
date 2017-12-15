@@ -58,10 +58,10 @@
 <body id="top">
   <header class="sticky">
     <span class="header-hack">
-      <a href="/" class="button" role="button">Home</a>
-      <a href="/#connect" class="button" role="button">Connect</a>
-      <a href="/gallery/" class="button" role="button">Gallery</a>
-      <a href="https://blog.jmthornton.net" class="button" role="button">Blog</a>
+      <a href="#" class="button" role="button">Home</a>
+      <a href="#connect" class="button" role="button">Connect</a>
+      <a href="gallery/" class="button" role="button">Gallery</a>
+      <a href="blog/" class="button" role="button">Blog</a>
     </span>
   </header>
 
@@ -340,7 +340,7 @@
           const xhr = new XMLHttpRequest();
           xhr.addEventListener('load', () => {
             const res = JSON.parse(xhr.responseText);
-            v.innerText = `Version ${res.version}`;
+            v.innerText = `Version ${res.version}-variant`;
           });
           xhr.open('get', '/package.json');
           xhr.send();
