@@ -61,8 +61,6 @@
     "jsonwebtoken": "^8.3.0",
     "node-fetch": "^2.1.2",
     "normalize.css": "^8.0.0",
-    "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.6.1",
     "query-string": "^6.1.0",
