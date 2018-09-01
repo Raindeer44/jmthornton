@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
@@ -35,7 +26,7 @@ const staticAssetName = isDebug
 
 // CSS Nano options http://cssnano.co/
 const minimizeCssOptions = {
-  discardComments: { removeAll: true },
+  discardComments: { removeAll: true }
 };
 
 //
@@ -58,13 +49,13 @@ const config = {
       : '[name].[chunkhash:8].chunk.js',
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
-      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
   },
 
   resolve: {
     // Allow absolute paths in imports, e.g. import Button from 'components/Button'
     // Keep in sync with .flowconfig and .eslintrc
-    modules: ['node_modules', 'src'],
+    modules: ['node_modules', 'src']
   },
 
   module: {
@@ -90,13 +81,13 @@ const config = {
               '@babel/preset-env',
               {
                 targets: {
-                  browsers: pkg.browserslist,
+                  browsers: pkg.browserslist
                 },
                 forceAllTransforms: !isDebug, // for UglifyJS
                 modules: false,
                 useBuiltIns: false,
-                debug: false,
-              },
+                debug: false
+              }
             ],
             // Experimental ECMAScript proposals
             // https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-
@@ -106,7 +97,7 @@ const config = {
             '@babel/preset-flow',
             // JSX
             // https://github.com/babel/babel/tree/master/packages/babel-preset-react
-            ['@babel/preset-react', { development: isDebug }],
+            ['@babel/preset-react', { development: isDebug }]
           ],
           plugins: [
             // Treat React JSX elements as value types and hoist them to the highest scope
@@ -117,9 +108,9 @@ const config = {
             ...(isDebug ? [] : ['@babel/transform-react-inline-elements']),
             // Remove unnecessary React propTypes from the production build
             // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
-            ...(isDebug ? [] : ['transform-react-remove-prop-types']),
-          ],
-        },
+            ...(isDebug ? [] : ['transform-react-remove-prop-types'])
+          ]
+        }
       },
 
       // Rules for Style Sheets
@@ -129,7 +120,7 @@ const config = {
           // Convert CSS into JS module
           {
             issuer: { not: [reStyle] },
-            use: 'isomorphic-style-loader',
+            use: 'isomorphic-style-loader'
           },
 
           // Process external/third-party styles
@@ -138,8 +129,8 @@ const config = {
             loader: 'css-loader',
             options: {
               sourceMap: isDebug,
-              minimize: isDebug ? false : minimizeCssOptions,
-            },
+              minimize: isDebug ? false : minimizeCssOptions
+            }
           },
 
           // Process internal/project styles (from src folder)
@@ -156,8 +147,8 @@ const config = {
                 ? '[name]-[local]-[hash:base64:5]'
                 : '[hash:base64:5]',
               // CSS Nano http://cssnano.co/
-              minimize: isDebug ? false : minimizeCssOptions,
-            },
+              minimize: isDebug ? false : minimizeCssOptions
+            }
           },
 
           // Apply PostCSS plugins including autoprefixer
@@ -165,27 +156,18 @@ const config = {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: './tools/postcss.config.js',
-              },
-            },
+                path: './tools/postcss.config.js'
+              }
+            }
           },
-
-          // Compile Less to CSS
-          // https://github.com/webpack-contrib/less-loader
-          // Install dependencies before uncommenting: yarn add --dev less-loader less
-          // {
-          //   test: /\.less$/,
-          //   loader: 'less-loader',
-          // },
 
           // Compile Sass to CSS
           // https://github.com/webpack-contrib/sass-loader
-          // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
-          // {
-          //   test: /\.(scss|sass)$/,
-          //   loader: 'sass-loader',
-          // },
-        ],
+          {
+            test: /\.(scss|sass)$/,
+            loader: 'sass-loader'
+          }
+        ]
       },
 
       // Rules for images
@@ -202,8 +184,8 @@ const config = {
                 loader: 'svg-url-loader',
                 options: {
                   name: staticAssetName,
-                  limit: 4096, // 4kb
-                },
+                  limit: 4096 // 4kb
+                }
               },
 
               // Inline lightweight images as Base64 encoded DataUrl string
@@ -211,32 +193,32 @@ const config = {
                 loader: 'url-loader',
                 options: {
                   name: staticAssetName,
-                  limit: 4096, // 4kb
-                },
-              },
-            ],
+                  limit: 4096 // 4kb
+                }
+              }
+            ]
           },
 
           // Or return public URL to image resource
           {
             loader: 'file-loader',
             options: {
-              name: staticAssetName,
-            },
-          },
-        ],
+              name: staticAssetName
+            }
+          }
+        ]
       },
 
       // Convert plain text into JS module
       {
         test: /\.txt$/,
-        loader: 'raw-loader',
+        loader: 'raw-loader'
       },
 
       // Convert Markdown into HTML
       {
         test: /\.md$/,
-        loader: path.resolve(__dirname, './lib/markdown-loader.js'),
+        loader: path.resolve(__dirname, './lib/markdown-loader.js')
       },
 
       // Return public URL for all assets unless explicitly excluded
@@ -245,22 +227,22 @@ const config = {
         exclude: [reScript, reStyle, reImage, /\.json$/, /\.txt$/, /\.md$/],
         loader: 'file-loader',
         options: {
-          name: staticAssetName,
-        },
+          name: staticAssetName
+        }
       },
 
       // Exclude dev modules from production build
       ...(isDebug
         ? []
         : [
-            {
-              test: resolvePath(
-                'node_modules/react-deep-force-update/lib/index.js',
-              ),
-              loader: 'null-loader',
-            },
-          ]),
-    ],
+          {
+            test: resolvePath(
+              'node_modules/react-deep-force-update/lib/index.js'
+            ),
+            loader: 'null-loader'
+          }
+        ])
+    ]
   },
 
   // Don't attempt to continue if there are any errors.
@@ -280,12 +262,12 @@ const config = {
     modules: isVerbose,
     reasons: isDebug,
     timings: true,
-    version: isVerbose,
+    version: isVerbose
   },
 
   // Choose a developer tool to enhance debugging
   // https://webpack.js.org/configuration/devtool/#devtool
-  devtool: isDebug ? 'cheap-module-inline-source-map' : 'source-map',
+  devtool: isDebug ? 'cheap-module-inline-source-map' : 'source-map'
 };
 
 //
@@ -299,7 +281,7 @@ const clientConfig = {
   target: 'web',
 
   entry: {
-    client: ['@babel/polyfill', './src/client.js'],
+    client: ['@babel/polyfill', './src/client.js']
   },
 
   plugins: [
@@ -307,7 +289,7 @@ const clientConfig = {
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
       'process.env.BROWSER': true,
-      __DEV__: isDebug,
+      __DEV__: isDebug
     }),
 
     // Emit a file with assets paths
@@ -333,10 +315,10 @@ const clientConfig = {
               ...c.chunks.reduce(
                 (files, cc) => [
                   ...files,
-                  ...cc.files.filter(fileFilter).map(addPath),
+                  ...cc.files.filter(fileFilter).map(addPath)
                 ],
-                [],
-              ),
+                []
+              )
             ];
             return acc;
           }, Object.create(null));
@@ -345,16 +327,16 @@ const clientConfig = {
           console.error(`ERROR: Cannot write ${chunkFileName}: `, err);
           if (!isDebug) process.exit(1);
         }
-      },
+      }
     }),
 
     ...(isDebug
       ? []
       : [
-          // Webpack Bundle Analyzer
-          // https://github.com/th0r/webpack-bundle-analyzer
-          ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
-        ]),
+        // Webpack Bundle Analyzer
+        // https://github.com/th0r/webpack-bundle-analyzer
+        ...(isAnalyze ? [new BundleAnalyzerPlugin()] : [])
+      ])
   ],
 
   // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
@@ -364,10 +346,10 @@ const clientConfig = {
         commons: {
           chunks: 'initial',
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-        },
-      },
-    },
+          name: 'vendors'
+        }
+      }
+    }
   },
 
   // Some libraries import Node modules but don't use them in the browser.
@@ -377,8 +359,8 @@ const clientConfig = {
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty',
-  },
+    tls: 'empty'
+  }
 };
 
 //
@@ -392,7 +374,7 @@ const serverConfig = {
   target: 'node',
 
   entry: {
-    server: ['@babel/polyfill', './src/server.js'],
+    server: ['@babel/polyfill', './src/server.js']
   },
 
   output: {
@@ -400,13 +382,13 @@ const serverConfig = {
     path: BUILD_DIR,
     filename: '[name].js',
     chunkFilename: 'chunks/[name].js',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'commonjs2'
   },
 
   // Webpack mutates resolve object, so clone it to avoid issues
   // https://github.com/webpack/webpack/issues/4817
   resolve: {
-    ...config.resolve,
+    ...config.resolve
   },
 
   module: {
@@ -424,18 +406,18 @@ const serverConfig = {
                 preset[0] !== '@babel/preset-env'
                   ? preset
                   : [
-                      '@babel/preset-env',
-                      {
-                        targets: {
-                          node: pkg.engines.node.match(/(\d+\.?)+/)[0],
-                        },
-                        modules: false,
-                        useBuiltIns: false,
-                        debug: false,
+                    '@babel/preset-env',
+                    {
+                      targets: {
+                        node: pkg.engines.node.match(/(\d+\.?)+/)[0]
                       },
-                    ],
-            ),
-          },
+                      modules: false,
+                      useBuiltIns: false,
+                      debug: false
+                    }
+                  ]
+            )
+          }
         };
       }
 
@@ -449,21 +431,21 @@ const serverConfig = {
           ...rule,
           options: {
             ...rule.options,
-            emitFile: false,
-          },
+            emitFile: false
+          }
         };
       }
 
       return rule;
-    }),
+    })
   },
 
   externals: [
     './chunk-manifest.json',
     './asset-manifest.json',
     nodeExternals({
-      whitelist: [reStyle, reImage],
-    }),
+      whitelist: [reStyle, reImage]
+    })
   ],
 
   plugins: [
@@ -471,7 +453,7 @@ const serverConfig = {
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
       'process.env.BROWSER': false,
-      __DEV__: isDebug,
+      __DEV__: isDebug
     }),
 
     // Adds a banner to the top of each generated chunk
@@ -479,8 +461,8 @@ const serverConfig = {
     new webpack.BannerPlugin({
       banner: 'require("source-map-support").install();',
       raw: true,
-      entryOnly: false,
-    }),
+      entryOnly: false
+    })
   ],
 
   // Do not replace node globals with polyfills
@@ -491,8 +473,8 @@ const serverConfig = {
     process: false,
     Buffer: false,
     __filename: false,
-    __dirname: false,
-  },
+    __dirname: false
+  }
 };
 
 export default [clientConfig, serverConfig];
