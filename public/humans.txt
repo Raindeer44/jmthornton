@@ -1,15 +1,27 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+/* TEAM */
+Primary developer: Jade Thornton
+Site: jmthornton.net
+GitHub: thornjad
+Twitter: jmthorntonwhat
+Location: US
 
-# TEAM
 
-  <name> -- <role> -- <twitter>
 
-# THANKS
+/* BLOG */
+Editor, primary writer: Jade Thornton
+Last update: September 29, 2017
 
-  <name>
 
-# TECHNOLOGY COLOPHON
 
-  CSS3, HTML5, JavaScript
-  React Starter Kit -- https://reactstarter.com/
+/* THANKS */
+Stephanie Shrider: all the love and support in the world
+GitHub: sshrid
+
+CosmoX: original creator of geek-profile, the ancestor of GeekProfile
+GitHub: hackjutsu
+
+
+
+/* SITE */
+Standards: HTML5, CSS3
+Software: Atom, Firefox, Chromium, Opera, NeoVim, npm, DuckDuckGo
