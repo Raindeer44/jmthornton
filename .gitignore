@@ -1,5 +1,4 @@
 # Compiled source #
-###################
 *.com
 *.class
 *.dll
@@ -9,7 +8,6 @@
 a.html
 
 # Packages #
-############
 *.7z
 *.dmg
 *.gz
@@ -20,13 +18,11 @@ a.html
 *.zip
 
 # Logs and databases #
-######################
 *.log
 *.sql
 *.sqlite
 
-# OS generated files #
-######################
+# OS generated #
 .DS_Store
 .DS_Store?
 ._*
@@ -35,33 +31,25 @@ a.html
 ehthumbs.db
 Thumbs.db
 
-# Verification files #
-######################
+# Verification #
 google*
 BingSiteAuth.xml
 
-# DNS files #
-#############
+# DNS #
 CNAME
 
-# Development files #
-#####################
+# Development #
 *.old
 .#*
 assets/style/main.css.map
 blog/_template/tmp.md
-
-# Development Directories #
-###########################
 .sass-cache/
 node_modules/
+.nyc_output
+coverage
 
-# Restricted files #
-####################
+# Restricted/reserved #
 .htaccess
-
-# Restricted directories #
-##########################
 ncarchive/
 cloud/
 cal/
@@ -69,6 +57,5 @@ cznxtqvn/
 czcavnpx/
 czshrnw/
 
-# Notes file #
-##############
+# Notes #
 notes.txt
