@@ -4,7 +4,7 @@
 const fs = require('fs');
 const { exec } = require('child_process');
 
-function languageIsSupported(language) {
+function languageIsSupported (language) {
   try {
     fs.accessSync(`app/translations/${language}.json`, fs.F_OK);
     return true;
@@ -30,8 +30,8 @@ module.exports = {
         }
 
         return '2 character language specifier is required';
-      },
-    },
+      }
+    }
   ],
 
   actions: () => {
@@ -40,43 +40,43 @@ module.exports = {
       type: 'modify',
       path: '../../app/i18n.js',
       pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\);\n)+/g,
-      templateFile: './language/intl-locale-data.hbs',
+      templateFile: './language/intl-locale-data.hbs'
     });
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
       pattern: /(\s+'[a-z]+',\n)(?!.*\s+'[a-z]+',)/g,
-      templateFile: './language/app-locale.hbs',
+      templateFile: './language/app-locale.hbs'
     });
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
       pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)/g,
-      templateFile: './language/translation-messages.hbs',
+      templateFile: './language/translation-messages.hbs'
     });
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
       pattern: /(addLocaleData\([a-z]+LocaleData\);\n)(?!.*addLocaleData\([a-z]+LocaleData\);)/g,
-      templateFile: './language/add-locale-data.hbs',
+      templateFile: './language/add-locale-data.hbs'
     });
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
       pattern: /([a-z]+:\sformatTranslationMessages\('[a-z]+',\s[a-z]+TranslationMessages\),\n)(?!.*[a-z]+:\sformatTranslationMessages\('[a-z]+',\s[a-z]+TranslationMessages\),)/g,
-      templateFile: './language/format-translation-messages.hbs',
+      templateFile: './language/format-translation-messages.hbs'
     });
     actions.push({
       type: 'add',
       path: '../../app/translations/{{language}}.json',
       templateFile: './language/translations-json.hbs',
-      abortOnFail: true,
+      abortOnFail: true
     });
     actions.push({
       type: 'modify',
       path: '../../app/app.js',
       pattern: /(import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),\n)(?!.*import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),)/g,
-      templateFile: './language/polyfill-intl-locale.hbs',
+      templateFile: './language/polyfill-intl-locale.hbs'
     });
     actions.push(() => {
       const cmd = 'npm run extract-intl';
@@ -88,5 +88,5 @@ module.exports = {
     });
 
     return actions;
-  },
+  }
 };

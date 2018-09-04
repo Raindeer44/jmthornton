@@ -19,7 +19,7 @@ module.exports = plop => {
     try {
       fs.accessSync(
         path.join(__dirname, `../../app/containers/${comp}`),
-        fs.F_OK,
+        fs.F_OK
       );
       return `containers/${comp}`;
     } catch (e) {
@@ -33,7 +33,7 @@ module.exports = plop => {
       '/../../app/',
       config.path,
       plop.getHelper('properCase')(answers.name),
-      '**.js',
+      '**.js'
     )}`;
     exec(`npm run prettify -- "${folderPath}"`);
     return folderPath;
