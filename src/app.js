@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'lodash';
 import 'sanitize.css/sanitize.css';
 
 import App from 'containers/App';
@@ -10,7 +9,7 @@ import './assets/style/global-styles';
 
 ReactDOM.render(
   <App />,
-  document.querySelector('.container'),
+  document.querySelector('.container')
 );
 
 // Install ServiceWorker and AppCache in the end since
