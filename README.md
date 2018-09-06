@@ -1,6 +1,6 @@
 ## Hello there!
 
-[![Known Vulnerabilities](https://snyk.io/test/github/thornjad/jmthornton/badge.svg)](https://snyk.io/test/github/thornjad/jmthornton)
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard) [![Known Vulnerabilities](https://snyk.io/test/github/thornjad/jmthornton/badge.svg)](https://snyk.io/test/github/thornjad/jmthornton)
 
 This is the source code of [jmthornton.net](http://jmthornton.net), the
 personal website of me, Jade Thornton. It showcases work I have done, provides
