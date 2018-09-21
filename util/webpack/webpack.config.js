@@ -1,8 +1,8 @@
 module.exports = {
   entry: ['./src/main.js'],
   output: {
-    path: __dirname,
-    publicPath: '/',
+    path: `${__dirname}/lib/`,
+    publicPath: '/lib/',
     filename: 'bundle.js'
   },
   module: {
@@ -11,7 +11,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['react', 'env']
+          presets: ['react', 'env', 'flow']
         }
       }
     ]
