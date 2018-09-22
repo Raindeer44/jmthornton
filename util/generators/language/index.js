@@ -2,9 +2,9 @@
  * Language Generator
  */
 const fs = require('fs');
-const { exec } = require('child_process');
+const {exec} = require('child_process');
 
-function languageIsSupported (language) {
+function languageIsSupported(language) {
   try {
     fs.accessSync(`app/translations/${language}.json`, fs.F_OK);
     return true;

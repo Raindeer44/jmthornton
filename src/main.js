@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Footer from './components/app/foot';
 import Nav from './components/app/nav';
 
+import HomePage from './components/home/';
+
 class App extends Component {
   constructor(props) {
     super(props);

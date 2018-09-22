@@ -8,7 +8,7 @@ const readline = require('readline');
  * @param  {string} message      The message to write next to the indicator
  * @param  {number} amountOfDots The amount of dots you want to animate
  */
-function animateProgress (message, amountOfDots) {
+function animateProgress(message, amountOfDots) {
   if (typeof amountOfDots !== 'number') {
     amountOfDots = 3;
   }
