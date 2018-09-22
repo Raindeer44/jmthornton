@@ -18,4 +18,4 @@ version 4:
 
 ---
 
-I am a self-taught web developer, perpetually learning and experimenting, and this site is both a personal showcase and playground for my new skills. If you have any comments, feedback, suggestions or would like to contribute, please register an issue at <https://github.com/thornjad/jmthornton/issues>.
+I am a self-taught web developer, perpetually learning and experimenting, and this site is both a personal showcase and playground for my new skills. If you have any comments, feedback, suggestions or would like to contribute, please register an issue at <https://gitlab.com/thornjad/jmthornton/issues>.
