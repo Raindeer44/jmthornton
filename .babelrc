@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current",
+        "browsers": ["last 3 versions", "not dead", "not ie >= 1", "Firefox ESR"]
+      }
+    }],
+    "@babel/preset-react"
+  ]
+}
