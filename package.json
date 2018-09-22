@@ -21,7 +21,7 @@
     "protect": "snyk protect --yes",
     "prepare": "npm run protect",
     "snyk": "snyk",
-    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "lint-js": "eslint .",
     "lint-css": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\"",
     "lint": "npm run lint-js && npm run lint-css",
     "fix-js": "npm run lint-js -- --fix",
@@ -34,51 +34,30 @@
     "posttest": "tap --coverage-report=clover",
     "check": "npm-check",
     "npmcheckversion": "node ./util/scripts/npmcheckversion.js",
-    "start": "http-server",
-    "start:dev": "npm test && webpack-dev-server --config util/webpack/webpack.config.js",
+    "start": "npm run build && http-server",
+    "start:dev": "npm test && webpack-dev-server --mode=development --open",
     "generate": "plop --plopfile util/generators/index.js",
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
     "bundle": "npm run build",
-    "build": "webpack --config util/webpack/webpack.config.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build": "webpack --mode=production --color -p --progress --hide-modules --display-optimization-bailout",
     "prebuild": "npm run build:clean",
     "build:clean": "rimraf ./build"
   },
   "pre-commit": "test",
-  "babel": {
-    "presets": [
-      [
-        "env"
-      ],
-      "react",
-      "stage-0"
-    ],
-    "env": {
-      "production": {
-        "only": [
-          "src"
-        ],
-        "plugins": [
-          "transform-react-remove-prop-types",
-          "transform-react-inline-elements",
-          "transform-react-constant-elements"
-        ]
-      }
-    }
-  },
   "dependencies": {
+    "mini.css": "^3.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
+    "css-loader": "^1.0.0",
     "eslint": "^5.6.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-flowtype": "^2.50.1",
@@ -89,9 +68,14 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
     "flow-bin": "^0.81.0",
+    "node-sass": "^4.9.3",
+    "offline-plugin": "^5.0.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
     "stylelint": "^9.5.0",
     "tap": "^12.0.1",
     "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
   },
   "lint-staged": {
