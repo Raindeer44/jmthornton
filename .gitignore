@@ -6,6 +6,8 @@
 *.o
 *.so
 a.html
+bundle.js
+sw.js
 
 # Packages #
 *.7z
