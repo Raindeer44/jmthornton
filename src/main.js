@@ -1,16 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import 'sanitize.css/sanitize.css';
 
-import App from 'containers/App';
+import Footer from './components/app/foot';
+import Nav from './components/app/nav';
 
-// CSS reset and Global Styles
-import './assets/style/global-styles';
+class App extends Component {
+  constructor(props) {
+    super(props);
+    // TODO let this drive page selection
+    this.state = {
+      selectedPage: 'Home'
+    };
+  }
 
-ReactDOM.render(
-  <App />,
-  document.querySelector('.container')
-);
+  render() {
+    return (
+      <div>
+        <Nav onPageSelect={selectedPage => this.setState({selectedPage})} />
+        <HomePage />
+        <Footer />
+      </div>
+    );
+  }
+}
+
+// Load the component into the dom
+ReactDOM.render(<App />, document.querySelector('.container'));
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
