@@ -10,9 +10,10 @@ and serves as a sandbox for my own experiments and growth.
 This branch is tracking the development of version 4 of my site. Goals for
 version 4:
 
-- [ ] React.js
-- [ ] mini.css v3
-- [ ] Sass
+- [x] React.js
+- [x] mini.css v3
+- [x] Sass
+- [ ] Parity with static site
 - [ ] Use markdown for blog posts
 
 ---
