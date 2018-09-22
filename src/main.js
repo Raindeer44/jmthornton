@@ -6,6 +6,8 @@ import Nav from './components/app/nav';
 
 import HomePage from './components/home/';
 
+import './assets/style/styleMain.scss';
+
 class App extends Component {
   constructor(props) {
     super(props);
